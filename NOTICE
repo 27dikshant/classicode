@@ -1,0 +1,22 @@
+ClassiCode - Enterprise Code Classification Tool
+Copyright (c) 2025 Dikshant <27dikshant@gmail.com>
+
+This product includes software developed by Dikshant.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+Project Identity:
+- Name: ClassiCode
+- Tagline: Enterprise code classification preventing leakage before it happens
+- Category: Security & Compliance
+- Description: ClassiCode enforces mandatory file classification 
+  (Confidential, Personal, Public, Internal), prevents unauthorized data leakage, 
+  and provides tamper-evident audit trails for enterprise compliance.

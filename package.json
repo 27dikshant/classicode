@@ -1,0 +1,197 @@
+{
+  "name": "classicode",
+  "displayName": "ClassiCode - Enterprise File Classification & DLP",
+  "description": "Enterprise-grade security extension that prevents code leakage through automated file classification and data loss prevention. Classify files as Public, Internal, Confidential, or Personal with permanent metadata storage and intelligent protection policies. Integrates seamlessly into development workflow with visual watermarks, clipboard protection, and DSPM compliance for security-conscious teams.",
+  "version": "1.0.0",
+  "publisher": "dikshant",
+  "author": {
+    "name": "Dikshant",
+    "email": "27dikshant@gmail.com",
+    "url": "https://www.linkedin.com/in/profile-dikshant/"
+  },
+  "license": "Apache-2.0",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Linters"
+  ],
+  "keywords": [
+    "security",
+    "data loss prevention",
+    "dlp",
+    "classification",
+    "enterprise",
+    "compliance",
+    "dspm",
+    "confidential",
+    "watermark",
+    "code protection",
+    "file security",
+    "metadata"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/27dikshant/classicode.git"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "File Classification",
+      "properties": {
+        "fileClassification.labels": {
+          "type": "array",
+          "default": ["Public", "Internal", "Confidential", "Personal"],
+          "description": "Available classification labels"
+        },
+        "fileClassification.colors": {
+          "type": "object",
+          "default": {
+            "Public": "#28a745",
+            "Internal": "#ffc107",
+            "Confidential": "#dc3545",
+            "Personal": "#6f42c1"
+          },
+          "description": "Colors for classification badges"
+        },
+        "fileClassification.excludePatterns": {
+          "type": "array",
+          "default": ["**/node_modules/**", "**/.git/**", "**/dist/**", "**/out/**"],
+          "description": "File patterns to exclude from classification"
+        },
+        "fileClassification.enforceClassification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Require classification for all files - prevents saving without classification"
+        },
+        "fileClassification.preventRemoval": {
+          "type": "boolean", 
+          "default": true,
+          "description": "Prevent removal of classification comments and data"
+        },
+        "fileClassification.addVisualComment": {
+          "type": "boolean",
+          "default": true,
+          "description": "Add visual classification comment to file (classification is stored in metadata regardless)"
+        },
+        "fileClassification.enableWatermarks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show classification watermarks in editor (cannot be disabled for Confidential files)"
+        },
+        "fileClassification.watermarkIntensity": {
+          "type": "string",
+          "enum": ["light", "medium", "heavy"],
+          "default": "medium",
+          "description": "Intensity of watermark display"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "fileClassification.classifyFile",
+        "title": "Classify File (Permanent)"
+      },
+      {
+        "command": "fileClassification.showClassificationData",
+        "title": "Show Classification Data (Debug)"
+      },
+      {
+        "command": "fileClassification.verifyIntegrity",
+        "title": "Verify Classification Integrity"
+      },
+      {
+        "command": "fileClassification.makeEditable",
+        "title": "Make File Editable (Remove Immutable Flag)"
+      },
+      {
+        "command": "fileClassification.showDSPMInfo",
+        "title": "Show DSPM Watermark Info"
+      },
+      {
+        "command": "fileClassification.interceptedCopy",
+        "title": "Copy (Classification Protected)"
+      },
+      {
+        "command": "fileClassification.interceptedCut", 
+        "title": "Cut (Classification Protected)"
+      },
+      {
+        "command": "fileClassification.interceptedDuplicate",
+        "title": "Duplicate (Classification Protected)"
+      },
+      {
+        "command": "fileClassification.interceptedSaveAs",
+        "title": "Save As (Classification Protected)"
+      },
+      {
+        "command": "fileClassification.interceptedRename",
+        "title": "Rename (Classification Protected)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "fileClassification.classifyFile",
+          "when": "!explorerResourceIsFolder",
+          "group": "fileClassification"
+        },
+        {
+          "command": "fileClassification.showClassificationData",
+          "when": "!explorerResourceIsFolder",
+          "group": "fileClassification"
+        },
+        {
+          "command": "fileClassification.verifyIntegrity",
+          "when": "!explorerResourceIsFolder",
+          "group": "fileClassification"
+        },
+        {
+          "command": "fileClassification.makeEditable",
+          "when": "!explorerResourceIsFolder",
+          "group": "fileClassification"
+        },
+        {
+          "command": "fileClassification.showDSPMInfo",
+          "when": "!explorerResourceIsFolder",
+          "group": "fileClassification"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "fileClassification.interceptedCopy",
+        "key": "ctrl+c",
+        "mac": "cmd+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "fileClassification.interceptedCut", 
+        "key": "ctrl+x",
+        "mac": "cmd+x", 
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  }
+}
